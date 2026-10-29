@@ -1,0 +1,375 @@
+@use 'fonts';
+
+:root {
+  color-scheme: light;
+
+  --bg: #f5f5f5;
+  --surface: #ffffff;
+  --surface-2: #f1f1f1;
+  --surface-3: #e6e6e6;
+  --fill-gray: #f1f1f1;
+  --fill-gray-strong: #e6e6e6;
+
+  --dark: #232323;
+
+  --lime: #d8ed5c;
+  --lime-strong: #cbe444;
+  --lime-soft: #eef7bd;
+  --lime-ink: #97b524;
+  --lavender: #c9b6f7;
+  --lavender-soft: #ece4fd;
+
+  --border: rgba(26, 26, 26, 0.08);
+  --border-strong: rgba(26, 26, 26, 0.16);
+  --border-input: rgba(26, 26, 26, 0.12);
+  --ring: rgba(26, 26, 26, 0.14);
+
+  --text: #1a1a1a;
+  --text-muted: #6f6f6f;
+  --text-soft: #9a9a9a;
+  --text-faint: #b9b9b9;
+  --text-on-dark: #ffffff;
+  --muted-on-dark: rgba(255, 255, 255, 0.6);
+
+  --accent: #232323;
+  --accent-hover: #000000;
+  --accent-strong: #000000;
+  --accent-soft: var(--fill-gray);
+  --accent-contrast: #ffffff;
+
+  --success-strong: #23814b;
+  --danger: #d94040;
+  --danger-soft: #fadfe0;
+  --warning: #b7811a;
+  --warning-soft: #fdeed6;
+
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+
+  --shadow-sm: 0 1px 2px rgba(26, 26, 26, 0.05);
+  --shadow-md: 0 8px 24px rgba(26, 26, 26, 0.08);
+  --shadow-lg: 0 18px 50px rgba(26, 26, 26, 0.18);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  scrollbar-gutter: stable;
+}
+
+html,
+body {
+  overflow-x: clip;
+  overscroll-behavior-y: none;
+}
+
+html,
+body,
+#app {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: $font-sans;
+  font-size: $font-size-base;
+  line-height: $line-base;
+  font-weight: $weight-regular;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-wrap: break-word;
+}
+
+button,
+summary,
+[role='button'] {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+input,
+textarea,
+select {
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+p,
+li {
+  text-wrap: pretty;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: $font-size-display;
+  line-height: $line-display;
+  font-weight: $weight-medium;
+  letter-spacing: -0.02em;
+
+  @include down($bp-sm) {
+    font-size: $font-size-2xl;
+    line-height: $line-xl;
+  }
+}
+
+h2 {
+  @include card-title;
+}
+
+h3 {
+  font-size: $font-size-base;
+  line-height: $line-base;
+  font-weight: $weight-medium;
+}
+
+a {
+  color: var(--text);
+  font-weight: $weight-medium;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+button {
+  font-family: inherit;
+}
+
+a,
+button,
+label,
+select,
+summary,
+[role='button'],
+[tabindex]:not([tabindex='-1']) {
+  transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease,
+    box-shadow 0.18s ease, opacity 0.18s ease, filter 0.18s ease, transform 0.18s ease;
+}
+
+svg {
+  transition: color 0.18s ease, fill 0.18s ease, stroke 0.18s ease;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: $space-5;
+
+  @include down($bp-sm) {
+    gap: $space-3;
+  }
+}
+
+.page-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: $space-4;
+  flex-wrap: wrap;
+  padding: $space-3 0 $space-2;
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1 1 320px;
+    min-width: 0;
+  }
+
+  &__subtitle {
+    color: var(--text-muted);
+    font-size: $font-size-md;
+    line-height: $line-md;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    flex-wrap: wrap;
+    flex: none;
+  }
+
+  @include down($bp-sm) {
+    gap: $space-3;
+    padding: $space-2 0 0;
+
+    &__subtitle {
+      font-size: $font-size-base;
+      line-height: $line-base;
+    }
+
+    &__actions {
+      width: 100%;
+
+      > * {
+        flex: 1 1 auto;
+      }
+    }
+  }
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+
+  &__error {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $space-2;
+    padding: $space-3 $space-4;
+    border-radius: $radius-md;
+    background: var(--danger-soft);
+    color: var(--danger);
+    font-size: $font-size-sm;
+    line-height: $line-sm;
+  }
+
+  &__note {
+    padding-top: $space-4;
+    border-top: 1px solid var(--border);
+    font-size: $font-size-sm;
+    line-height: $line-sm;
+    text-align: center;
+    color: var(--text-soft);
+  }
+}
+
+.card {
+  @include card;
+}
+
+.grid {
+  display: grid;
+  gap: $space-5;
+
+  &--2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  &--4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  @include down($bp-lg) {
+    &--4 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @include down($bp-md) {
+    &--2 {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  @include down($bp-sm) {
+    gap: $space-3;
+
+    &--4 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @include down($bp-lg) {
+    &--4 > :last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+    }
+  }
+
+}
+
+
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(4px);
+}
+
+.page-leave-to {
+  opacity: 0;
+}
+
+@media print {
+  @page {
+    margin: 12mm;
+  }
+
+  html,
+  body,
+  #app {
+    height: auto;
+    background: #fff;
+    color: #000;
+  }
+
+  * {
+    box-shadow: none !important;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  h1,
+  h2,
+  h3 {
+    break-after: avoid;
+  }
+
+  tr,
+  li {
+    break-inside: avoid;
+  }
+
+  thead {
+    display: table-header-group;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

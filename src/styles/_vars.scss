@@ -1,0 +1,178 @@
+$space-1: 4px;
+$space-2: 8px;
+$space-3: 12px;
+$space-4: 16px;
+$space-5: 20px;
+$space-6: 24px;
+$space-7: 28px;
+$space-8: 32px;
+$space-9: 40px;
+$space-10: 56px;
+
+$radius-xs: 8px;
+$radius-sm: 12px;
+$radius-md: 16px;
+$radius-lg: 20px;
+$radius-xl: 24px;
+$radius-2xl: 28px;
+$radius-pill: 999px;
+
+$font-sans: 'Golos Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+  Arial, sans-serif;
+
+$font-size-xs: 11px;
+$font-size-sm: 13px;
+$font-size-base: 14px;
+$font-size-md: 15px;
+$font-size-lg: 16px;
+$font-size-xl: 18px;
+$font-size-2xl: 21px;
+$font-size-3xl: 24px;
+$font-size-display: 28px;
+
+$line-xs: 16px;
+$line-sm: 18px;
+$line-base: 20px;
+$line-md: 22px;
+$line-lg: 26px;
+$line-xl: 30px;
+$line-display: 34px;
+
+$weight-regular: 400;
+$weight-medium: 500;
+$weight-semibold: 500;
+$weight-bold: 600;
+
+$sidebar-width: 240px;
+$topbar-height: 64px;
+$tabbar-height: 62px;
+$content-pad: 32px;
+$control-height-lg: 40px;
+
+$bp-sm: 640px;
+$bp-md: 900px;
+$bp-lg: 1200px;
+
+@mixin down($breakpoint) {
+  @media (max-width: #{$breakpoint - 1px}) {
+    @content;
+  }
+}
+
+@mixin panel($fill: var(--surface), $radius: $radius-xl) {
+  background: $fill;
+  border-radius: $radius;
+}
+
+@mixin card($padding: $space-6) {
+  @include panel;
+  padding: $padding;
+}
+
+@mixin inset($padding: $space-4, $radius: $radius-md) {
+  padding: $padding;
+  border: 1px solid var(--border);
+  border-radius: $radius;
+  background: var(--surface-2);
+}
+
+@mixin focus-ring {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--ring);
+}
+
+@mixin eyebrow {
+  font-size: $font-size-sm;
+  line-height: $line-sm;
+  font-weight: $weight-medium;
+  color: var(--text-soft);
+}
+
+@mixin label {
+  font-size: $font-size-sm;
+  line-height: $line-sm;
+  font-weight: $weight-semibold;
+  color: var(--text-muted);
+}
+
+@mixin card-title {
+  font-size: $font-size-md;
+  line-height: $line-md;
+  font-weight: $weight-medium;
+  letter-spacing: -0.005em;
+}
+
+@mixin icon-badge($size: 44px) {
+  display: grid;
+  place-items: center;
+  width: $size;
+  height: $size;
+  flex: none;
+  border-radius: 50%;
+  background: var(--fill-gray);
+  color: var(--text);
+}
+
+@mixin chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 22px;
+  padding: 0 $space-3;
+  border-radius: $radius-pill;
+  font-size: $font-size-sm;
+  font-weight: $weight-medium;
+  white-space: nowrap;
+}
+
+@mixin form-row($gap: $space-4) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: $gap;
+
+  @include down($bp-sm) {
+    > :has(input[type='date']),
+    > input[type='date'] {
+      grid-column: 1 / -1;
+    }
+  }
+
+  > * {
+    min-width: 0;
+  }
+
+  @include down($bp-sm) {
+    gap: $space-3;
+
+    > *:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+    }
+  }
+}
+
+@mixin form-row-wide {
+  grid-column: 1 / -1;
+}
+
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(26, 26, 26, 0.18) transparent;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(26, 26, 26, 0.18);
+    border-radius: $radius-pill;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}

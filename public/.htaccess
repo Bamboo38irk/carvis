@@ -1,0 +1,8 @@
+AddType application/wasm .wasm
+
+RewriteEngine On
+RewriteBase /carvis/
+RewriteRule ^index\.html$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /carvis/index.html [L]
